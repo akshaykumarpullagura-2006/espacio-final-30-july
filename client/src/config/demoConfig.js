@@ -32,6 +32,24 @@ export const DEMO_CONFIG = {
     featureDialogMessage: 'This feature is disabled in the demonstration version and will be available in the full release.'
   },
 
+  // Full-Screen Agreement Text
+  AGREEMENT: {
+    title: 'CONFIDENTIAL DEMO AGREEMENT',
+    intro: 'This demonstration is provided exclusively for authorized evaluation by ESPACIO Management.',
+    ipNotice: 'The contents of this website, including its UI, workflows, design system, source code, business logic, graphics, animations, and documentation are confidential intellectual property of TEAM VEINS.',
+    prohibitedHeader: 'By proceeding, you agree that you will not:',
+    prohibitedList: [
+      'Record the demonstration for unauthorized distribution.',
+      'Copy or reproduce the UI or functionality.',
+      'Reverse engineer or imitate the software.',
+      'Redistribute screenshots or recordings without written permission.',
+      'Share access credentials with unauthorized individuals.'
+    ],
+    legalNotice: 'Unauthorized copying or infringement of intellectual property may be subject to applicable legal remedies.',
+    checkboxLabel: 'I have read and agree to the Confidential Demonstration Agreement.',
+    buttonText: 'Continue to Demo'
+  },
+
   // List of feature IDs or names that are restricted in Demo Mode
   RESTRICTED_FEATURES: [
     'Export',

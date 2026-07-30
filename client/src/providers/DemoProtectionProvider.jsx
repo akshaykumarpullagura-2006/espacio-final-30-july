@@ -10,6 +10,7 @@ import DemoBadge from '../components/demo/DemoBadge';
 import DemoBanner from '../components/demo/DemoBanner';
 import DemoToast from '../components/demo/DemoToast';
 import DemoFeatureModal from '../components/demo/DemoFeatureModal';
+import DemoAgreementModal from '../components/demo/DemoAgreementModal';
 
 /**
  * Global Demo Protection Provider
@@ -19,6 +20,15 @@ import DemoFeatureModal from '../components/demo/DemoFeatureModal';
  */
 export const DemoProtectionProvider = ({ children }) => {
   const isDemoActive = DEMO_CONFIG.DEMO_MODE;
+
+  const [isAgreementAccepted, setIsAgreementAccepted] = useState(() => {
+    return sessionStorage.getItem('espacio_demo_agreement_accepted') === 'true';
+  });
+
+  const handleAcceptAgreement = useCallback(() => {
+    sessionStorage.setItem('espacio_demo_agreement_accepted', 'true');
+    setIsAgreementAccepted(true);
+  }, []);
 
   const [isDevToolsOpen, setIsDevToolsOpen] = useState(false);
   const [isTabFocused, setIsTabFocused] = useState(true);
@@ -179,22 +189,28 @@ export const DemoProtectionProvider = ({ children }) => {
 
   return (
     <DemoProtectionContext.Provider value={contextValue}>
-      <div className={`demo-mode-root ${isDevToolsOpen ? 'pointer-events-none filter blur-lg' : ''}`}>
-        {children}
-      </div>
+      {!isAgreementAccepted ? (
+        <DemoAgreementModal onAccept={handleAcceptAgreement} />
+      ) : (
+        <>
+          <div className={`demo-mode-root ${isDevToolsOpen ? 'pointer-events-none filter blur-lg' : ''}`}>
+            {children}
+          </div>
 
-      {/* Security Overlays & UI Components */}
-      <WatermarkOverlay />
-      <DevToolsOverlay isOpen={isDevToolsOpen} />
-      <DemoTabPauseOverlay isTabFocused={isTabFocused} />
-      <DemoBadge />
-      <DemoBanner />
-      <DemoToast toasts={toasts} />
-      <DemoFeatureModal
-        isOpen={restrictedModal.isOpen}
-        featureName={restrictedModal.featureName}
-        onClose={closeRestrictedModal}
-      />
+          {/* Security Overlays & UI Components */}
+          <WatermarkOverlay />
+          <DevToolsOverlay isOpen={isDevToolsOpen} />
+          <DemoTabPauseOverlay isTabFocused={isTabFocused} />
+          <DemoBadge />
+          <DemoBanner />
+          <DemoToast toasts={toasts} />
+          <DemoFeatureModal
+            isOpen={restrictedModal.isOpen}
+            featureName={restrictedModal.featureName}
+            onClose={closeRestrictedModal}
+          />
+        </>
+      )}
     </DemoProtectionContext.Provider>
   );
 };
