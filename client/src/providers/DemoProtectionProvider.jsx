@@ -193,7 +193,7 @@ export const DemoProtectionProvider = ({ children }) => {
         <DemoAgreementModal onAccept={handleAcceptAgreement} />
       ) : (
         <>
-          <div className={`demo-mode-root ${isDevToolsOpen ? 'pointer-events-none filter blur-lg' : ''}`}>
+          <div className="demo-mode-root">
             {children}
           </div>
 
