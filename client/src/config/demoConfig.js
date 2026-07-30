@@ -13,6 +13,7 @@ export const DEMO_CONFIG = {
     company: 'ESPACIO DEMO',
     team: 'TEAM VEINS',
     version: 'Preview Build',
+    copyrightText: '© Copyright Reserved • TEAM VEINS',
     watermarkLines: [
       'CONFIDENTIAL',
       'ESPACIO DEMO',
