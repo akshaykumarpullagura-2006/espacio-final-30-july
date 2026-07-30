@@ -497,3 +497,47 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
+/* ── Demo Mode Protection CSS Utilities ── */
+@keyframes watermarkDrift {
+  0% {
+    transform: rotate(-25deg) translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: rotate(-25deg) translateY(-25px) translateX(15px);
+  }
+  100% {
+    transform: rotate(-25deg) translateY(0px) translateX(0px);
+  }
+}
+
+.animate-watermark-drift {
+  animation: watermarkDrift 28s ease-in-out infinite;
+}
+
+body.demo-mode-active {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+body.demo-mode-active input,
+body.demo-mode-active textarea,
+body.demo-mode-active select,
+body.demo-mode-active [contenteditable="true"] {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+body.demo-mode-active img {
+  -webkit-user-drag: none !important;
+  -khtml-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -o-user-drag: none !important;
+  user-drag: none !important;
+}
+
+

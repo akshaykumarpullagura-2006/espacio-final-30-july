@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Outlet } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { HelmetProvider } from 'react-helmet-async';
+import { DemoProtectionProvider } from './providers/DemoProtectionProvider';
 import { AnimatePresence, motion } from 'framer-motion';
 import Lenis from 'lenis';
 
@@ -119,40 +120,42 @@ function App() {
   return (
     <HelmetProvider>
       <AuthProvider>
-        <Router>
-          <ScrollToTop />
-          <CustomCursor />
-          <Routes>
-            {/* ── Public Routes (Animated) ────────────────────────── */}
-            <Route element={<MainLayout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/projects/:slug" element={<ProjectDetails />} />
-              <Route path="/what-we-do" element={<WhatWeDo />} />
-              <Route path="/what-we-do/:slug" element={<WhatWeDo />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/products/:slug" element={<ProductDetails />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/faq" element={<FAQ />} />
-              
-              {/* 404 fallback */}
-              <Route path="*" element={<NotFound />} />
-            </Route>
+        <DemoProtectionProvider>
+          <Router>
+            <ScrollToTop />
+            <CustomCursor />
+            <Routes>
+              {/* ── Public Routes (Animated) ────────────────────────── */}
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:slug" element={<ProjectDetails />} />
+                <Route path="/what-we-do" element={<WhatWeDo />} />
+                <Route path="/what-we-do/:slug" element={<WhatWeDo />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/products/:slug" element={<ProductDetails />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/faq" element={<FAQ />} />
+                
+                {/* 404 fallback */}
+                <Route path="*" element={<NotFound />} />
+              </Route>
 
-            {/* ── Admin Routes (No Navbar/Footer) ───────────────────── */}
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<AdminLayout><AdminDashboardHome /></AdminLayout>} />
-            <Route path="/admin/enquiries" element={<AdminLayout><AdminEnquiries /></AdminLayout>} />
-            <Route path="/admin/projects" element={<AdminLayout><AdminProjects /></AdminLayout>} />
-            <Route path="/admin/products" element={<AdminLayout><AdminProducts /></AdminLayout>} />
-            <Route path="/admin/testimonials" element={<AdminLayout><AdminTestimonials /></AdminLayout>} />
-            <Route path="/admin/gallery" element={<AdminLayout><AdminMedia /></AdminLayout>} />
-            <Route path="/admin/faqs" element={<AdminLayout><AdminFAQs /></AdminLayout>} />
-            <Route path="/admin/settings" element={<AdminLayout><AdminSettings /></AdminLayout>} />
-          </Routes>
-        </Router>
+              {/* ── Admin Routes (No Navbar/Footer) ───────────────────── */}
+              <Route path="/admin" element={<AdminLogin />} />
+              <Route path="/admin/dashboard" element={<AdminLayout><AdminDashboardHome /></AdminLayout>} />
+              <Route path="/admin/enquiries" element={<AdminLayout><AdminEnquiries /></AdminLayout>} />
+              <Route path="/admin/projects" element={<AdminLayout><AdminProjects /></AdminLayout>} />
+              <Route path="/admin/products" element={<AdminLayout><AdminProducts /></AdminLayout>} />
+              <Route path="/admin/testimonials" element={<AdminLayout><AdminTestimonials /></AdminLayout>} />
+              <Route path="/admin/gallery" element={<AdminLayout><AdminMedia /></AdminLayout>} />
+              <Route path="/admin/faqs" element={<AdminLayout><AdminFAQs /></AdminLayout>} />
+              <Route path="/admin/settings" element={<AdminLayout><AdminSettings /></AdminLayout>} />
+            </Routes>
+          </Router>
+        </DemoProtectionProvider>
       </AuthProvider>
     </HelmetProvider>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Search, Filter, Eye, CheckCircle, Clock, XCircle, AlertCircle, Mail, Building2, DollarSign, Phone, MapPin, Download } from 'lucide-react';
 import { db, collection, getDocs, updateDoc, doc, query, orderBy } from '../../lib/firebaseClient';
+import { useDemoProtection } from '../../hooks/useDemoProtection';
 
 const statusConfig = {
   new: { label: 'New', color: 'text-gold', bg: 'bg-gold/15', icon: AlertCircle },
@@ -19,6 +20,7 @@ const mockLeads = [
 ];
 
 const AdminEnquiries = () => {
+  const { handleRestrictedClick } = useDemoProtection();
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -124,8 +126,8 @@ const AdminEnquiries = () => {
           <p className="font-sans text-xs text-white/40 uppercase tracking-widest">Client consultation requests</p>
         </div>
         <button
-          onClick={exportToExcel}
-          className="flex items-center space-x-2 bg-gold hover:bg-gold-hover text-charcoal font-sans text-xs font-bold px-4 py-2.5 rounded-lg transition-all shadow-md"
+          onClick={() => handleRestrictedClick('CSV Export', exportToExcel)}
+          className="flex items-center space-x-2 bg-gold hover:bg-gold-hover text-charcoal font-sans text-xs font-bold px-4 py-2.5 rounded-lg transition-all shadow-md cursor-pointer"
         >
           <Download size={14} />
           <span>Export to Excel (.csv)</span>
